@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Simple Lambda Interpirter</title>
+    </head>
+    <body>
+        <h1>Simple Lambda Interpriter</h1>
+        <p>〇expected syntax is below</p>
+        <p>{expr} | {idenifier}, ( λ{identifier}. {expr} ),( {expr} {expr} )</p>
+        <p id="last_p">{identifier} | [a-z]</p>
+        <div id="area">
+            <nav>
+                <button id="btn_run1">Parse</button>
+                <button id="btn_clear">Clear</button>
+            </nav>
+            <div class="parent">
+                <div class="child">
+                    <textarea id="input" cols="30" rows="10">( ( λx. x ) x )</textarea>
+                </div>
+                <div class="child">
+                    <pre id="output"><label>Output: </label>
+                        <code></code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="module">
+        import * as Parser from './src/parser.js';
+
+        const btn_run1 = document.querySelector("#btn_run1");
+        const editor = document.querySelector("#input");
+        const btn_clear = document.querySelector("#btn_clear");
+        const output = document.querySelector("#output code");
+        btn_clear.addEventListener("click", ()=>{
+            editor.value = "";
+            console.log("cleared!!");
+        });
+        btn_run1.addEventListener("click", () => {
+            const r = Parser.parse(editor.value);
+            output.textContent += r + "\n";
+            console.log(r);
+            //output.textContent += "Run clicked!!\n";
+            console.log("parsed at ver1!!");
+        });
+    </script>
+    <script>
+
+    </script>
+    <style>
+        body {
+            padding: 20px 100px;
+            background-color: #333;
+        }
+        h1 {
+            color: white;
+        }
+        p {
+            color: white;
+        }
+        #last_p{
+            padding-bottom: 20px;
+            border-bottom: 2px solid white ;
+        }
+        button {
+            width: 80px;
+            height: 40px;
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: #999;
+            color: white;
+        }
+        #area {
+            margin-top: 60px;
+        }
+        label{
+            color: white;
+        }
+        textarea {
+            width: 100%;
+        }
+        .parent{
+            display: flex;
+        }
+        .child{
+            width: 40%;
+            height: 250px;
+            padding-top: 40px;
+            margin-right: 10%;
+        }
+        pre{
+            text-align: left;
+            color: white;
+            margin-top: 0;
+        }
+        label{
+            font-size: 20px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        }
+        code{
+            background-color: #555;
+            display: block;
+            color: white;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            margin-top: -10px;
+            padding: 5px 10px;
+        }
+    </style>
+</html>
