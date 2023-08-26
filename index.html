@@ -13,6 +13,7 @@
         <p id="last_p">{identifier} | [a-z]</p>
         <div id="area">
             <nav>
+                <button id="btn_run3">Scan</button>
                 <button id="btn_run1">Parse</button>
                 <button id="btn_run2">Evaluate</button>
                 <button id="btn_clear">Clear</button>
@@ -32,9 +33,11 @@
     <script type="module">
         import * as Parser from './src/parser.js';
         import * as Interpriter from './src/interpriter.js';
+        import * as Scanner from './src/scanner.js';
 
         const btn_run1 = document.querySelector("#btn_run1");
         const btn_run2 = document.querySelector("#btn_run2");
+        const btn_run3 = document.querySelector("#btn_run3");
         const editor = document.querySelector("#input");
         const btn_clear = document.querySelector("#btn_clear");
         const output = document.querySelector("#output code");
@@ -43,18 +46,27 @@
             console.log("cleared!!");
         });
         btn_run1.addEventListener("click", () => {
-            const r = Parser.parse(editor.value);
-            output.textContent += r + "\n";
-            console.log(r);
+            const s = Parser.parse(editor.value);
+            output.textContent += s + "\n";
+            console.log(s);
             //output.textContent += "Run clicked!!\n";
             console.log("parsed at ver1!!");
         });
         btn_run2.addEventListener("click", () => {
-            const r = Interpriter.evaluate(editor.value);
-            output.textContent += r + "\n";
-            console.log(r);
+            const t = Interpriter.evaluate(editor.value);
+            output.textContent += t + "\n";
+            console.log(t);
             //output.textContent += "Run clicked!!\n";
             console.log("evaluated at ver1!!");
+        });
+        btn_run3.addEventListener("click", () => {
+            const r = new Scanner.Scanner(editor.value);
+            for(let i = 0; i < r.length; i++){
+                output.textContent += r.tokens[i] + "\n";
+            }
+            console.log(r.tokens);
+            //output.textContent += "Run clicked!!\n";
+            console.log("scaned at ver1!!");
         });
     </script>
     <script>
