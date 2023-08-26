@@ -14,6 +14,7 @@
         <div id="area">
             <nav>
                 <button id="btn_run1">Parse</button>
+                <button id="btn_run2">Evaluate</button>
                 <button id="btn_clear">Clear</button>
             </nav>
             <div class="parent">
@@ -30,8 +31,10 @@
     </body>
     <script type="module">
         import * as Parser from './src/parser.js';
+        import * as Interpriter from './src/interpriter.js';
 
         const btn_run1 = document.querySelector("#btn_run1");
+        const btn_run2 = document.querySelector("#btn_run2");
         const editor = document.querySelector("#input");
         const btn_clear = document.querySelector("#btn_clear");
         const output = document.querySelector("#output code");
@@ -45,6 +48,13 @@
             console.log(r);
             //output.textContent += "Run clicked!!\n";
             console.log("parsed at ver1!!");
+        });
+        btn_run2.addEventListener("click", () => {
+            const r = Interpriter.evaluate(editor.value);
+            output.textContent += r + "\n";
+            console.log(r);
+            //output.textContent += "Run clicked!!\n";
+            console.log("evaluated at ver1!!");
         });
     </script>
     <script>
