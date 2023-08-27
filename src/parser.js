@@ -16,7 +16,7 @@ export function parse(text){
             r.pos += 1;
             let inParen;
             if(r.peek().match(/λ[a-z]./)){
-                let absHead = [r.peek()];
+                let absHead = [r.peek()[1]];
                 r.pos += 1;
                 let absBody = expr();
                 inParen = ["abs", absHead, absBody];
